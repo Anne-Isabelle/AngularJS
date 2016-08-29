@@ -76,7 +76,7 @@
 					<td><input ng-model="p.word "/></td>
 					<td>{{p.response}}</td>
 					<td><input ng-model="p.response"/></td>
-					<td><button ng-click = "sendClick(result.indexOf(p))">Supprimer</button></td>
+					<td><button ng-controller="suppressCtrl" ng-click = "sendClick(p)">Supprimer</button></td>
 				</tr>
 				<tr ng-if="result.length == 0">
 					<td colspan="4">Aucun résultat trouvé</td>
@@ -84,5 +84,6 @@
 			</tr>
 		</tbody>
 	</table>
+
 </body>
 </html>

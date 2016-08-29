@@ -20,8 +20,9 @@ bot.controller("dictionnaryCtrl", function($scope){
 });
 
 bot.controller("suppressCtrl", function($scope){
-	$scope.sendClick = function(){
-		alert("je vais supprimer");
+	$scope.sendClick = function(p){
+		var index = $scope.sentences.indexOf(p);
+		$scope.sentences.splice(index, 1);
 	};
 });
 
