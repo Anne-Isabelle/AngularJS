@@ -2,20 +2,87 @@
 <html ng-app="botApp">
 <head>
 	<title></title>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 	<script src="angular.min.js"></script>
 	<script src="app.js"></script>
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+	
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<meta charset="utf-8">
 </head>
 <body>
-	<p id="toto">
+<!-- 	<p id="toto">
 		{{ 1+1 }}
 	</p>
 	<div ng-controller="botController">
 		{{ hello }}
 	</div>
+	<div>
+		{{name}}
+		<p>Nom</p>
+		<input type="text" ng-model ="name" />
+	</div>
+	<div>
+		{{age}}
+		<p>Age</p>
+		<input type="text" ng-model="age">
+	</div>
+	<div ng-if="age > 18">
+		Bienvenue
+	</div>
+	<div ng-switch="name">
+		<div ng-switch-when="marcel">
+			martinique
+		</div>
+		<div ng-switch-when="sophie">
+			guadeloupe
+		</div>
+		<div ng-switch-when="lionel">
+			guyane
+		</div>
+	</div> -->
+
+	<div>
+		Recherche de phrases
+	</div>
+		
+	</div>
+	<input type="text" ng-model="search"/>
+	<span class="glyphicon glyphicon-search"></span>
+	
+	<table ng-controller="dictionnaryCtrl" class="table">
+		<thead>
+			<tr>
+				<th>Phrase</th>
+				<th>Edition phrase</th>
+				<th>Réponse</th>
+				<th>Edition réponse</th>
+				<th>
+					<select id="filter" ng-model="searchFilter">
+						<option value="word">Phrase</option>
+						<option value="response">Réponse</option>
+					</select>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-if="searchFilter">
+				<tr ng-repeat="p in sentences | orderBy: searchFilter: false | filter: search as result">
+					<td>{{p.word}}</td>
+					<td><input ng-model="p.word "/></td>
+					<td>{{p.response}}</td>
+					<td><input ng-model="p.response"/></td>
+					<td><button ng-click = "sendClick(result.indexOf(p))">Supprimer</button></td>
+				</tr>
+				<tr ng-if="result.length == 0">
+					<td colspan="4">Aucun résultat trouvé</td>
+				</tr>
+			</tr>
+		</tbody>
+	</table>
 </body>
 </html>
